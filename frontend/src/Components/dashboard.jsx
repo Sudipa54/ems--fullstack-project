@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Dashboard() {
@@ -17,6 +17,7 @@ function Dashboard() {
   };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    console.log("dashboard");
   };
 
   return (
@@ -58,20 +59,25 @@ function Dashboard() {
             isOpen ? "block" : "hidden"
           } absolute bg-gray-50 dark:bg-gray-800 h-full shadow-md z-10`}
         >
+          <div className="p-4 flex items-center justify-center">
+            <Link to="" className="text-2xl font-bold text-white">
+              Code With Sudipa
+            </Link>
+          </div>
           <ul class="flex flex-col p-4 space-y-2 font-medium">
             <li>
-              <a
-                href="#"
+              <Link
+                to=""
                 class="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600"
-                aria-current="page"
               >
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li>
               <Link
                 to="/dashboard/employee"
                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                onClick={() => console.log("Navigating to Employee")}
               >
                 Manage Employees
               </Link>
@@ -100,6 +106,9 @@ function Dashboard() {
           </ul>
         </div>
       </nav>
+      <div className="p-4">
+        <Outlet />
+      </div>
     </div>
   );
 }
