@@ -63,6 +63,11 @@ function AdminLogin() {
           Login
         </button>
       </form>
+      <div>
+        {/* <div>Back to Home </div> */}
+        {/* <input type = "button" value = "Back to Home" onClick = {() => { */}
+        <Link to="/">Back to Login</Link>
+      </div>
     </div>
   );
 }
