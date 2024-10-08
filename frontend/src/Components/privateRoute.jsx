@@ -1,16 +1,11 @@
-// import React from "react";
-// import { Navigate } from "react-router-dom";
-
-// const PrivateRoute = ({ children }) => {
-//   return localStorage.getItem("valid") ? children : <Navigate to="/" />;
-// };
-
-// export default PrivateRoute;
-import React from "react";
+import { Navigate } from "react-router-dom";
 
 function PrivateRoute({ children }) {
-  // This version of PrivateRoute does not perform any checks and will directly render the children components
-  return children;
+  const loginStatus = localStorage.getItem("loginStatus");
+  if (loginStatus) {
+    return <div>{children}</div>;
+  }
+  return <Navigate to="/" />;
 }
 
 export default PrivateRoute;

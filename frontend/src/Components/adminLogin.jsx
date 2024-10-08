@@ -1,8 +1,52 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function AdminLogin() {
   const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  function updateEmail(event) {
+    const currentEmail = event.target.value;
+    setUser((currentValue) => ({ ...currentValue, email: currentEmail }));
+  }
+  function updatePassword(event) {
+    const currentPassword = event.target.value;
+    setUser((currentValue) => ({
+      ...currentValue,
+      password: currentPassword,
+    }));
+  }
+  console.log(JSON.stringify(user));
+  //localhost:3000/auth/adminlogin
+  function loginUser() {
+    fetch("http://localhost:3000/auth/adminlogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+
+      .then((data) => {
+        // localStorage.setItem("abcd", 1234);
+        localStorage.setItem("loginStatus", true);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.error("Error during login:", error);
+      });
+  }
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("loginStatus");
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, []);
   return (
     <div>
       <form className="max-w-sm mx-auto">
@@ -14,6 +58,7 @@ function AdminLogin() {
             Your email
           </label>
           <input
+            onChange={updateEmail}
             type="email"
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -29,6 +74,7 @@ function AdminLogin() {
             Your password
           </label>
           <input
+            onChange={updatePassword}
             type="password"
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -53,9 +99,7 @@ function AdminLogin() {
           </label>
         </div>
         <button
-          onClick={() => {
-            navigate("/dashboard");
-          }}
+          onClick={loginUser}
           // type="submit"
           type="button"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

@@ -41,9 +41,9 @@ function Dashboard() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M3 12h18M3 6h18M3 18h18"
               />
             </svg>
@@ -59,8 +59,8 @@ function Dashboard() {
             isOpen ? "block" : "hidden"
           } absolute bg-gray-50 dark:bg-gray-800 h-full shadow-md z-10`}
         >
-          <div classNameName="p-4 flex items-center justify-center">
-            <Link to="" classNameName="text-2xl font-bold text-white">
+          <div className="p-4 flex items-center justify-center">
+            <Link to="" className="text-2xl font-bold text-white">
               Code With Sudipa
             </Link>
           </div>
@@ -106,7 +106,7 @@ function Dashboard() {
           </ul>
         </div>
       </nav>
-      <div classNameName="p-4">
+      <div className="p-4">
         <Outlet />
       </div>
     </div>
