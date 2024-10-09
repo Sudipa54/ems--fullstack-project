@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ function Login() {
     email: "",
     password: "",
   });
+
   function updateEmail(event) {
     const currentEmail = event.target.value;
     setUser((currentValue) => ({ ...currentValue, email: currentEmail }));
@@ -20,9 +21,33 @@ function Login() {
       password: currentPassword,
     }));
   }
+  console.log(JSON.stringify(user));
+  //localhost:3000/auth/adminlogin
+  function loginUser() {
+    fetch("http://localhost:3000/employee/employee_login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
 
-  //login function:
-  function loginUser() {}
+      .then((data) => {
+        // localStorage.setItem("abcd", 1234);
+        localStorage.setItem("loginStatus", true);
+        navigate("/employee-detail");
+      })
+      .catch((error) => {
+        console.error("Error during login:", error);
+      });
+  }
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("loginStatus");
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   return (
     <div>
@@ -102,7 +127,7 @@ function Login() {
             <a
               className="text-blue-700 hover:underline dark:text-blue-500"
               onClick={() => {
-                navigate("/adminlogin");
+                navigate("/admin-login");
               }}
             >
               Admin login

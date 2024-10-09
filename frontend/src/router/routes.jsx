@@ -3,15 +3,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDOM, { createRoot } from "react-dom/client";
 import React from "react";
 import Login from "../Components/login";
-import AdminLogin from "../Components/adminLogin";
+import AdminLogin from "../Components/admin-login";
 import Dashboard from "../Components/dashboard";
-import EmployeeDetail from "../Components/employeeDetail";
-import EmployeeEdit from "../Components/employeeEdit";
+import EmployeeDetail from "../Components/employee-detail";
+import EmployeeEdit from "../Components/employee-edit";
 import AddEmployee from "../Components/addEmployee";
 import AddCategory from "../Components/addCategory";
 import Home from "../Components/home";
 import Employee from "../Components/employee";
-import PrivateRoute from "../Components/PrivateRoute";
+import PrivateRoute from "../Components/private-route";
 
 // import Login from "./Components/login";
 // import AdminLogin from "../src/Components/adminLogin";
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/adminlogin",
+    path: "/admin-login",
     element: <AdminLogin />,
   },
   {
@@ -32,6 +32,31 @@ export const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <Dashboard />
+      </PrivateRoute>
+    ),
+  },
+
+  {
+    path: "/employee-detail",
+    element: (
+      <PrivateRoute>
+        <EmployeeDetail />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/employee",
+    element: (
+      <PrivateRoute>
+        <Employee />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/home",
+    element: (
+      <PrivateRoute>
+        <Home />
       </PrivateRoute>
     ),
   },

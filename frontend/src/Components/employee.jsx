@@ -34,16 +34,16 @@ function Employee() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m1 1 4 4 4-4"
                 />
               </svg>
             </button>
             {/* <!-- Dropdown menu --> */}
             <div
-              classNameName={`${
+              className={`${
                 isDropdownOpen ? "block" : "hidden"
               } z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
             >
@@ -71,9 +71,9 @@ function Employee() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                 />
               </svg>
@@ -234,9 +234,9 @@ function Employee() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                     />
                   </svg>
@@ -392,7 +392,7 @@ function Employee() {
       {/* Add Employee Button */}
       <button
         onClick={() => navigate("/dashboard/add_employee")}
-        classNameName="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
       >
         Add Employee
       </button>
