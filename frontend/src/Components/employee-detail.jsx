@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function EmployeeDetail() {
   // State to control the visibility of the menu
@@ -21,14 +21,14 @@ function EmployeeDetail() {
   //     })
   //     .catch((err) => console.log(err));
   // };
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState();
   console.log(user);
   const id = 11;
-function handleLogout() { 
-  localStorage.removeItem("loginStatus");
-  navigate("/");
-}
+  function handleLogout() {
+    localStorage.removeItem("loginStatus");
+    Navigate("/");
+  }
 
   useEffect(() => {
     fetch(`http://localhost:3000/employee/detail/${id}`)
@@ -37,12 +37,13 @@ function handleLogout() {
         console.log(data);
       });
   }, []);
-  return user?(
+  return user ? (
     <div>
       <h1>Employee Detail</h1>
       <Link to="/">Back to Home Page</Link>
       <button onClick={handleLogout}>Logout</button>
     </div>
+  ) : (
     // <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
     //   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     //     <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -94,6 +95,7 @@ function handleLogout() {
     //     </div>
     //   </div>
     // </nav>
+    <div>...Loading ..</div>
   );
 }
 

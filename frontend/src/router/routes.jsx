@@ -6,13 +6,14 @@ import Login from "../Components/login";
 import AdminLogin from "../Components/admin-login";
 import Dashboard from "../Components/dashboard";
 import EmployeeDetail from "../Components/employee-detail";
-import EmployeeEdit from "../Components/employee-edit";
-import AddEmployee from "../Components/addEmployee";
-import AddCategory from "../Components/addCategory";
+
 import Home from "../Components/home";
 import Employee from "../Components/employee";
 import PrivateRoute from "../Components/private-route";
-
+import Category from "../Components/category";
+import Profile from "../Components/profile";
+import AddCategory from "../Components/add-category";
+import AddEmployee from "../Components/add-employee";
 // import Login from "./Components/login";
 // import AdminLogin from "../src/Components/adminLogin";
 // import Login from "../src/Components/login";
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/employee",
+    path: "/dashboard/employee",
     element: (
       <PrivateRoute>
         <Employee />
@@ -53,10 +54,42 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/home",
+    path: "/dashboard/home",
     element: (
       <PrivateRoute>
         <Home />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/dashboard/category",
+    element: (
+      <PrivateRoute>
+        <Category />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/dashboard/profile",
+    element: (
+      <PrivateRoute>
+        <Profile />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/dashboard/category/add-category",
+    element: (
+      <PrivateRoute>
+        <AddCategory />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/dashboard/employee/add-employee",
+    element: (
+      <PrivateRoute>
+        <AddEmployee />
       </PrivateRoute>
     ),
   },
