@@ -45,7 +45,7 @@ function Login() {
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("loginStatus");
     if (isLoggedIn) {
-      navigate("/dashboard");
+      navigate("/employee-detail");
     }
   }, []);
 

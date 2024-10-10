@@ -60,14 +60,17 @@ function Dashboard() {
           } absolute bg-gray-50 dark:bg-gray-800 h-full shadow-md z-10`}
         >
           <div className="p-4 flex items-center justify-center">
-            <Link to="" className="text-2xl font-bold text-white">
+            <Link
+              to="/dashboard/home"
+              className="text-2xl font-bold text-white"
+            >
               Code With Sudipa
             </Link>
           </div>
           <ul className="flex flex-col p-4 space-y-2 font-medium">
             <li>
               <Link
-                to=""
+                to="/dashboard/home"
                 className="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600"
               >
                 Dashboard

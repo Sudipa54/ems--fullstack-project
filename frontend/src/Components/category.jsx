@@ -15,7 +15,7 @@ function Category() {
       {" "}
       {/* This will center the button both vertically and horizontally */}
       <button
-        onClick={() => navigate("/dashboard/add_category")}
+        onClick={() => navigate("/dashboard/category/add-category")}
         className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
       >
         Add Category

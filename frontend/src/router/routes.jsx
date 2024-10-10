@@ -6,7 +6,7 @@ import Login from "../Components/login";
 import AdminLogin from "../Components/admin-login";
 import Dashboard from "../Components/dashboard";
 import EmployeeDetail from "../Components/employee-detail";
-
+import EmployeeEdit from "../Components/employee-edit";
 import Home from "../Components/home";
 import Employee from "../Components/employee";
 import PrivateRoute from "../Components/private-route";
@@ -14,9 +14,7 @@ import Category from "../Components/category";
 import Profile from "../Components/profile";
 import AddCategory from "../Components/add-category";
 import AddEmployee from "../Components/add-employee";
-// import Login from "./Components/login";
-// import AdminLogin from "../src/Components/adminLogin";
-// import Login from "../src/Components/login";
+
 // import "./global.css";
 
 export const router = createBrowserRouter([
@@ -93,6 +91,15 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
+  {
+    path: "/dashboard/employee/employee-edit",
+    element: (
+      <PrivateRoute>
+        <EmployeeEdit />
+      </PrivateRoute>
+    ),
+  },
+
   // {
   //   path: "/employee-detail",
   //   element: <EmployeeDetail />,

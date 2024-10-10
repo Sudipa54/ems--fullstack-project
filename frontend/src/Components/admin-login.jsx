@@ -8,7 +8,7 @@ function AdminLogin() {
     email: "",
     password: "",
   });
-
+  console.log(user);
   function updateEmail(event) {
     const currentEmail = event.target.value;
     setUser((currentValue) => ({ ...currentValue, email: currentEmail }));
@@ -34,6 +34,10 @@ function AdminLogin() {
 
       .then((data) => {
         // localStorage.setItem("abcd", 1234);
+        if (!data.loginStatus) {
+          throw new Error("An error occurred while fetching the data");
+        }
+
         localStorage.setItem("loginStatus", true);
         navigate("/dashboard");
       })
