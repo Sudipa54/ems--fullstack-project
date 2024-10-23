@@ -24,16 +24,6 @@ function Dashboard() {
       });
   };
 
-  // const handleLogout = () => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_SERVER_URL}/auth/logout`)
-  //     .then((result) => {
-  //       if (result.data.Status) {
-  //         localStorage.removeItem("valid");
-  //         navigate("/");
-  //       }
-  //     });
-  // };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
