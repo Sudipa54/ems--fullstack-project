@@ -35,6 +35,10 @@ function Login() {
 
       .then((data) => {
         // localStorage.setItem("abcd", 1234);
+        if (!data.loginStatus) {
+          throw new Error("An error occurred while fetching the data");
+        }
+
         localStorage.setItem("loginStatus", true);
         navigate("/employee-detail");
       })

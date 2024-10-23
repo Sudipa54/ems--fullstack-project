@@ -33,8 +33,17 @@ export const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoute>
     ),
+    children: [
+      { path: "home", element: <Home /> },
+      { path: "employee", element: <Employee /> },
+      { path: "category", element: <Category /> },
+      { path: "profile", element: <Profile /> },
+      { path: "category/add-category", element: <AddCategory /> },
+      { path: "employee/add-employee", element: <AddEmployee /> },
+      { path: "employee/employee-edit", element: <EmployeeEdit /> },
+      // Add more nested routes here as needed
+    ],
   },
-
   {
     path: "/employee-detail",
     element: (
@@ -43,77 +52,78 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
-  {
-    path: "/dashboard/employee",
-    element: (
-      <PrivateRoute>
-        <Employee />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/dashboard/home",
-    element: (
-      <PrivateRoute>
-        <Home />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/dashboard/category",
-    element: (
-      <PrivateRoute>
-        <Category />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/dashboard/profile",
-    element: (
-      <PrivateRoute>
-        <Profile />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/dashboard/category/add-category",
-    element: (
-      <PrivateRoute>
-        <AddCategory />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/dashboard/employee/add-employee",
-    element: (
-      <PrivateRoute>
-        <AddEmployee />
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/dashboard/employee/employee-edit",
-    element: (
-      <PrivateRoute>
-        <EmployeeEdit />
-      </PrivateRoute>
-    ),
-  },
+
+  // {
+  //   path: "/dashboard",
+  //   element: (
+  //     <PrivateRoute>
+  //       <Dashboard />
+  //     </PrivateRoute>
+  //   ),
+  // },
 
   // {
   //   path: "/employee-detail",
-  //   element: <EmployeeDetail />,
+  //   element: (
+  //     <PrivateRoute>
+  //       <EmployeeDetail />
+  //     </PrivateRoute>
+  //   ),
   // },
   // {
-  //   path: "/employee-edit",
-  //   element: <EmployeeEdit />,
+  //   path: "/dashboard/employee",
+  //   element: (
+  //     <PrivateRoute>
+  //       <Employee />
+  //     </PrivateRoute>
+  //   ),
   // },
   // {
-  //   path: "/add-employee",
-  //   element: <AddEmployee />,
+  //   path: "/dashboard/home",
+  //   element: (
+  //     <PrivateRoute>
+  //       <Home />
+  //     </PrivateRoute>
+  //   ),
   // },
   // {
-  //   path: "/employee",
-  //   element: <Employee />,
+  //   path: "/dashboard/category",
+  //   element: (
+  //     <PrivateRoute>
+  //       <Category />
+  //     </PrivateRoute>
+  //   ),
+  // },
+  // {
+  //   path: "/dashboard/profile",
+  //   element: (
+  //     <PrivateRoute>
+  //       <Profile />
+  //     </PrivateRoute>
+  //   ),
+  // },
+  // {
+  //   path: "/dashboard/category/add-category",
+  //   element: (
+  //     <PrivateRoute>
+  //       <AddCategory />
+  //     </PrivateRoute>
+  //   ),
+  // },
+  // {
+  //   path: "/dashboard/employee/add-employee",
+  //   element: (
+  //     <PrivateRoute>
+  //       <AddEmployee />
+  //     </PrivateRoute>
+  //   ),
+  // },
+  // {
+  //   path: "/dashboard/employee/employee-edit",
+  //   element: (
+  //     <PrivateRoute>
+  //       <EmployeeEdit />
+  //     </PrivateRoute>
+  //   ),
   // },
 ]);

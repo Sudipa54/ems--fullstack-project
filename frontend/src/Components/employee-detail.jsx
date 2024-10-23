@@ -1,34 +1,52 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function EmployeeDetail() {
   // State to control the visibility of the menu
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Function to toggle the menu open/closed
-  // const toggleMenu = () => {
-  //   setIsOpen(!isOpen);
-  // };
-  // const handleLogout = () => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_SERVER_URL}/employee/logout`)
-  //     .then((result) => {
-  //       if (result.data.Status) {
-  //         localStorage.removeItem("valid");
-  //         Navigate("/");
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // const navigate = useNavigate();
+  // const [user, setUser] = useState();
+  // console.log(user);
+  // // const id = 11;
+
+  const [employee, setEmployee] = useState({});
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState();
-  console.log(user);
-  const id = 11;
-  function handleLogout() {
-    localStorage.removeItem("loginStatus");
-    Navigate("/");
-  }
+
+  const handleLogout = () => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_SERVER_URL}/employee/logout`)
+      .then((result) => {
+        if (result.data.Status) {
+          localStorage.removeItem("valid");
+          navigate("/");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_SERVER_URL}/employee/detail/` + id)
+      .then((result) => {
+        setEmployee(result.data[0]);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
+  console.log("Employee is ", employee);
+
+  // function handleLogout() {
+  //   localStorage.removeItem("loginStatus");
+  //   Navigate("/");
+  // }
 
   useEffect(() => {
     fetch(`http://localhost:3000/employee/detail/${id}`)
@@ -37,14 +55,8 @@ function EmployeeDetail() {
         console.log(data);
       });
   }, []);
-  return user ? (
+  return employee ? (
     <div>
-      {/* <h1>Employee Detail</h1>
-      <Link to="/">Back to Home Page</Link>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
-  ) : (
-    <div>...Loading ..</div> */}
       <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
