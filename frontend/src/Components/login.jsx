@@ -23,7 +23,8 @@ function Login() {
   }
   console.log(JSON.stringify(user));
   //localhost:3000/auth/adminlogin
-  function loginUser() {
+  function loginUser(e) {
+    e.preventDefault();
     fetch("http://localhost:3000/employee/employee_login", {
       method: "POST",
       headers: {
@@ -38,20 +39,14 @@ function Login() {
         if (!data.loginStatus) {
           throw new Error("An error occurred while fetching the data");
         }
-
+        console.log(data);
         localStorage.setItem("loginStatus", true);
-        navigate("/employee-detail");
+        navigate("/employee-detail/" + data.id);
       })
       .catch((error) => {
         console.error("Error during login:", error);
       });
   }
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("loginStatus");
-    if (isLoggedIn) {
-      navigate("/employee-detail");
-    }
-  }, []);
 
   return (
     <div>

@@ -6,22 +6,8 @@ function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_SERVER_URL}/auth/logout`)
-      .then((result) => {
-        if (result.data.Status) {
-          // If logout was successful, remove login status and redirect
-          localStorage.removeItem("valid"); // Ensure this is the correct key for logged-in status
-          navigate("/", { replace: true }); // Redirect to the login page
-        } else {
-          // Handle failed logout if your backend indicates failure
-          console.error("Logout failed:", result.data.Message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error during logout:", error);
-        // Optionally, show a user-friendly error message
-      });
+    localStorage.removeItem("valid");
+    navigate("/", { replace: true });
   };
 
   const toggleMenu = () => {
@@ -117,8 +103,11 @@ function Dashboard() {
           </ul>
         </div>
       </nav>
-      <div className="p-4">
-        <Outlet />
+      <div
+        className="main-content"
+        style={{ marginLeft: "250px", padding: "20px" }}
+      >
+        <Outlet /> {/* This will render child routes/components */}
       </div>
     </div>
   );

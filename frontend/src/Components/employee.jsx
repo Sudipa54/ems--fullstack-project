@@ -68,8 +68,8 @@ function Employee() {
 
   return (
     <div>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+        <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900 p-6">
           <div>
             <button
               onClick={toggleDropdown}
@@ -142,7 +142,7 @@ function Employee() {
           </div>
         </div>
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
             <tr>
               <th scope="col" className="p-4">
                 <div className="flex items-center">
@@ -157,6 +157,9 @@ function Employee() {
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
+                Image
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
@@ -168,6 +171,7 @@ function Employee() {
               <th scope="col" className="px-6 py-3">
                 Salary
               </th>
+
               <th scope="col" className="px-6 py-3">
                 Action
               </th>
@@ -194,6 +198,13 @@ function Employee() {
                     </label>
                   </div>
                 </td>
+                <td className="px-6 py-4">
+                  <img
+                    src={`http://localhost:3000/images/${employee.image}`}
+                    alt={employee.name}
+                    className="w-12 h-12 object-cover rounded-full" // Adjust size with w-* and h-*, make it circular with rounded-full
+                  />
+                </td>
                 <td className="px-6 py-4">{employee.name}</td>
                 <td className="px-6 py-4">{employee.email}</td>
                 <td className="px-6 py-4">{employee.address}</td>
@@ -208,7 +219,7 @@ function Employee() {
                   </button>
                   <button
                     onClick={() => handleDeleteEmployee(employee.id)}
-                    className="text-red-600 hover:underline ml-2"
+                    className="text-red-600 hover:underline ml-2 p-9"
                   >
                     Delete
                   </button>
@@ -221,7 +232,7 @@ function Employee() {
       {/* Add Employee Button */}
       <button
         onClick={() => navigate("/dashboard/employee/add-employee")}
-        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+        className="py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md p-6 px-6"
       >
         Add Employee
       </button>
