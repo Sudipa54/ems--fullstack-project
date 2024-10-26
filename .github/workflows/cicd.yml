@@ -1,0 +1,64 @@
+name: Deploy Fullstack Application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Frontend Docker Image
+        run: |
+          docker build --build-arg VITE_BACKEND_SERVER_URL=${{ secrets.VITE_BACKEND_SERVER_URL }} -t 097671/erp-frontend:latest ./frontend
+
+      - name: Build Backend Docker Image
+        run: docker build -t 097671/erp-backend:latest ./backend
+
+      - name: Push Frontend Image to Docker Hub
+        run: docker push 097671/erp-frontend:latest
+
+      - name: Push Backend Image to Docker Hub
+        run: docker push 097671/erp-backend:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "CORS_URL=${{ secrets.CORS_URL }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "VITE_BACKEND_SERVER_URL=${{ secrets.VITE_BACKEND_SERVER_URL }}" >> .env
+
+      - name: Pull Frontend Image from Docker Hub
+        run: docker pull 097671/erp-frontend:latest
+
+      - name: Pull Backend Image from Docker Hub
+        run: docker pull 097671/erp-backend:latest
+
+      - name: Stop and Remove Existing Containers
+        run: docker-compose down || true
+
+      - name: Run Docker Compose
+        run: docker-compose up -d
+
+      - name: Cleanup Unused Docker Resources
+        run: |
+          docker image prune -a -f
+          docker system prune --volumes -f

@@ -1,0 +1,47 @@
+version: "3"
+services:
+  backend:
+    build: ./backend
+    image: 097671/erp-backend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PORT=${DB_PORT}
+      - CORS_URL=${CORS_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_BACKEND_SERVER_URL: ${VITE_BACKEND_SERVER_URL}
+    image: 097671/erp-frontend:latest
+    ports:
+      - "80:4173"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+volumes:
+  mysql-data:
