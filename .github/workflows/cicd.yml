@@ -17,16 +17,16 @@ jobs:
 
       - name: Build Frontend Docker Image
         run: |
-          docker build --build-arg VITE_BACKEND_SERVER_URL=${{ secrets.VITE_BACKEND_SERVER_URL }} -t 097671/erp-frontend:latest ./frontend
+          docker build --build-arg VITE_BACKEND_SERVER_URL=${{ secrets.VITE_BACKEND_SERVER_URL }} -t sudipa654/erp-frontend:latest ./frontend
 
       - name: Build Backend Docker Image
-        run: docker build -t 097671/erp-backend:latest ./backend
+        run: docker build -t sudipa654/erp-backend:latest ./backend
 
       - name: Push Frontend Image to Docker Hub
-        run: docker push 097671/erp-frontend:latest
+        run: docker push sudipa654/erp-frontend:latest
 
       - name: Push Backend Image to Docker Hub
-        run: docker push 097671/erp-backend:latest
+        run: docker push sudipa654/erp-backend:latest
 
   deploy:
     needs: build
@@ -47,10 +47,10 @@ jobs:
           echo "VITE_BACKEND_SERVER_URL=${{ secrets.VITE_BACKEND_SERVER_URL }}" >> .env
 
       - name: Pull Frontend Image from Docker Hub
-        run: docker pull 097671/erp-frontend:latest
+        run: docker pull sudipa654/erp-frontend:latest
 
       - name: Pull Backend Image from Docker Hub
-        run: docker pull 097671/erp-backend:latest
+        run: docker pull sudipa654/erp-backend:latest
 
       - name: Stop and Remove Existing Containers
         run: docker-compose down || true
